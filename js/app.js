@@ -655,10 +655,200 @@ function initHeroCanvas() {
   animate();
 }
 
+// 2ГИС Реальные отзывы с официальной страницы салона в Петропавловске
+const REVIEWS_2GIS = [
+  {
+    name: "Александр Грибовский",
+    avatar: "АГ",
+    date: "15 июня 2026",
+    rating: 5,
+    text: "Хочу выразить огромную благодарность компании Toros Autotrade за профессиональную помощь в продаже моего автомобиля. Весь процесс прошёл быстро, прозрачно и без лишних хлопот. Сотрудники всегда были на связи, подробно консультировали по всем вопросам и помогли найти покупателя за один день. Отдельно хочу отметить высокий уровень сервиса, честный подход к работе и внимательное отношение к клиенту. Рекомендую Toros Autotrade всем!"
+  },
+  {
+    name: "Ольга Куропатова",
+    avatar: "ОК",
+    date: "29 мая 2026",
+    rating: 5,
+    text: "Хочу сказать огромное спасибо ребятам за помощь в покупке машины. Честно — переживала, как и любой человек перед такой покупкой. Но вы всё сделали максимально спокойно, чётко и по-человечески. Без лишней суеты, без «впаривания», всё объяснили, показали и поддержали на каждом этапе. В итоге я уехала с ощущением, что всё сделано правильно."
+  },
+  {
+    name: "Оралбек Кобеев",
+    avatar: "ОК",
+    date: "21 июля 2026",
+    rating: 5,
+    text: "Всех приветствую! Торос авто молодцы, все подсказали, оперативно продали машину за 4 дня. Отдельное спасибо Сагиту — сопровождал от начала и до конца сделки, всегда был на связи!"
+  },
+  {
+    name: "Азамат Жусупов",
+    avatar: "АЖ",
+    date: "18 сентября 2026",
+    rating: 5,
+    text: "Дмитрий молодчик, за полчаса продал мою машину! Грамотный специалист, четкий, а я долго не мог продать сам. Сделка прошла быстро и без лишних вопросов."
+  },
+  {
+    name: "Анатолий Говорков",
+    avatar: "АГ",
+    date: "4 июня 2026",
+    rating: 5,
+    text: "Очень довольны покупкой авто. Обслужили просто классно, помогли с выбором машины и оформлением. Всё проверили при нас на месте. Спасибо большое!"
+  },
+  {
+    name: "Ирина Самусенко",
+    avatar: "ИС",
+    date: "21 июня 2026",
+    rating: 5,
+    text: "Купили машину, состояние идеальное, очень довольны покупке! Спасибо работникам Toros auto за профессионализм и оперативность в оформлении. Советую обращаться."
+  },
+  {
+    name: "Захар Коваленко",
+    avatar: "ЗК",
+    date: "19 июня 2026",
+    rating: 5,
+    text: "Авто детально проверяют при вас, соотношение цена-качество отличное. Покупкой автомобиля полностью доволен, рекомендую салон!"
+  },
+  {
+    name: "N V",
+    avatar: "NV",
+    date: "25 мая 2026",
+    rating: 5,
+    text: "Продал авто за 1 день. Ребята толковые, знают свое дело, документы подготовили быстро, расчёт моментальный."
+  },
+  {
+    name: "Eldar Darkeev",
+    avatar: "ED",
+    date: "25 мая 2026",
+    rating: 5,
+    text: "Обслуживание на высшем уровне. Ребятам огромное рахмет! Все четко, открыто и оперативно."
+  }
+];
+
+function initReviewsSlider() {
+  const track = document.getElementById('reviews-track');
+  const prevBtn = document.getElementById('reviews-prev-btn');
+  const nextBtn = document.getElementById('reviews-next-btn');
+  if (!track) return;
+
+  // Дублируем отзывы для бесконечной бесшовной прокрутки
+  const doubleList = [...REVIEWS_2GIS, ...REVIEWS_2GIS];
+
+  function starSvg() {
+    return `<svg class="w-3.5 h-3.5 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+  }
+
+  track.innerHTML = doubleList.map(r => `
+    <div class="w-[300px] sm:w-[335px] shrink-0 p-6 rounded-2xl bg-[#0c0d12] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between select-none">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs flex items-center justify-center font-specs">
+              ${r.avatar}
+            </div>
+            <div>
+              <div class="text-xs sm:text-sm font-bold text-white font-specs leading-tight">${r.name}</div>
+              <div class="text-[10px] text-gray-500 font-specs mt-0.5">${r.date}</div>
+            </div>
+          </div>
+          <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full font-specs">2ГИС</span>
+        </div>
+        <div class="flex items-center gap-1 mb-3">
+          ${starSvg()}${starSvg()}${starSvg()}${starSvg()}${starSvg()}
+        </div>
+        <p class="text-xs sm:text-sm text-gray-300 font-body leading-relaxed line-clamp-4">
+          «${r.text}»
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-500 font-specs">
+        <span>Проверенный отзыв</span>
+        <span class="text-emerald-400 flex items-center gap-1">
+          <svg class="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          2ГИС
+        </span>
+      </div>
+    </div>
+  `).join('');
+
+  // Логика плавной непрерывной анимации линии
+  let isHovered = false;
+  let isDragging = false;
+  let startX = 0;
+  let scrollStart = 0;
+  const speed = 0.6; // пикселей за кадр
+  let touchTimeout;
+
+  track.addEventListener('mouseenter', () => { isHovered = true; });
+  track.addEventListener('mouseleave', () => {
+    isHovered = false;
+    isDragging = false;
+    track.classList.remove('cursor-grabbing');
+  });
+
+  // Touch события (для комфортного свайпа на смартфонах)
+  track.addEventListener('touchstart', () => {
+    isHovered = true;
+    clearTimeout(touchTimeout);
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    clearTimeout(touchTimeout);
+    touchTimeout = setTimeout(() => {
+      isHovered = false;
+    }, 2500);
+  }, { passive: true });
+
+  // Перетаскивание мышью (Drag & Scroll)
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollStart = track.scrollLeft;
+    track.classList.add('cursor-grabbing');
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.4;
+    track.scrollLeft = scrollStart - walk;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (isDragging) {
+      isDragging = false;
+      track.classList.remove('cursor-grabbing');
+    }
+  });
+
+  // Кнопки листания стрелками
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -340, behavior: 'smooth' });
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: 340, behavior: 'smooth' });
+    });
+  }
+
+  // Плавный анимационный тик через requestAnimationFrame
+  function tick() {
+    if (!isHovered && !isDragging) {
+      track.scrollLeft += speed;
+      // Бесшовный возврат на начало при прохождении половины
+      if (track.scrollLeft >= track.scrollWidth / 2) {
+        track.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
 // Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', () => {
   renderCatalog(CARS_DATA);
   initHeroCanvas();
+  initReviewsSlider();
 
   if (window.initCreditCalculator) window.initCreditCalculator();
   if (window.initTradeInWizard) window.initTradeInWizard();
