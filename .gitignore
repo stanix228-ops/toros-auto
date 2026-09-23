@@ -1,0 +1,13 @@
+# Logs and OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.log
+*.tmp
+
+# Dependencies
+node_modules/
+
+# Raw media folder (all assets are optimized inside assets/)
+медиа/

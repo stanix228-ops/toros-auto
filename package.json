@@ -1,0 +1,12 @@
+{
+  "name": "toros-auto-website",
+  "version": "1.0.0",
+  "description": "Сайт автосалона TOROS AUTO Петропавловск",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["car-dealer", "auto", "toros-auto", "dark-luxury"],
+  "author": "TOROS AUTO",
+  "license": "ISC"
+}
